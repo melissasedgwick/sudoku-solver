@@ -1,6 +1,8 @@
 require 'sudoku_solver'
 
-@puzzle = [
+describe "Solution" do
+
+$puzzle = [
   [5,3,0,0,7,0,0,0,0],
   [6,0,0,1,9,5,0,0,0],
   [0,9,8,0,0,0,0,6,0],
@@ -11,7 +13,7 @@ require 'sudoku_solver'
   [0,0,0,4,1,9,0,0,5],
   [0,0,0,0,8,0,0,7,9]]
 
- @solution = [
+ $solution = [
   [5,3,4,6,7,8,9,1,2],
   [6,7,2,1,9,5,3,4,8],
   [1,9,8,3,4,2,5,6,7],
@@ -23,7 +25,7 @@ require 'sudoku_solver'
   [3,4,5,2,8,6,1,7,9]]
 
 
-@puzzle2 = [
+$puzzle2 = [
   [5, 6, 0, 8, 4, 7, 0, 0, 0],
   [3, 0, 9, 0, 0, 0, 6, 0, 0],
   [0, 0, 8, 0, 0, 0, 0, 0, 0],
@@ -34,7 +36,7 @@ require 'sudoku_solver'
   [0, 0, 6, 0, 0, 0, 8, 0, 7],
   [0, 0, 0, 3, 1, 6, 0, 5, 9]]
 
-@solution2 = [
+$solution2 = [
   [5, 6, 1, 8, 4, 7, 9, 2, 3],
   [3, 7, 9, 5, 2, 1, 6, 8, 4],
   [4, 2, 8, 9, 6, 3, 1, 7, 5],
@@ -45,7 +47,7 @@ require 'sudoku_solver'
   [1, 4, 6, 2, 9, 5, 8, 3, 7],
   [2, 8, 7, 3, 1, 6, 4, 5, 9]]
 
-@puzzle3 = [
+$puzzle3 = [
   [8, 0, 0, 0, 6, 0, 0, 0, 3],
   [4, 0, 0, 8, 0, 3, 0, 0, 1],
   [7, 0, 0, 0, 2, 0, 0, 0, 6],
@@ -56,7 +58,7 @@ require 'sudoku_solver'
   [6, 0, 0, 1, 9, 5, 0, 0, 0],
   [0, 9, 8, 0, 0, 0, 0, 6, 0]]
 
-@solution3 = [
+$solution3 = [
   [8, 5, 9, 7, 6, 1, 4, 2, 3],
   [4, 2, 6, 8, 5, 3, 7, 9, 1],
   [7, 1, 3, 9, 2, 4, 8, 5, 6],
@@ -67,11 +69,16 @@ require 'sudoku_solver'
   [6, 7, 2, 1, 9, 5, 3, 4, 8],
   [1, 9, 8, 3, 4, 2, 5, 6, 7]]
 
-describe "Solution" do
   it "should return completed puzzle" do
-    Test.assert_equals(sudoku(@puzzle), @solution)
-    Test.assert_equals(sudoku(@puzzle2), @solution2)
-    Test.assert_equals(sudoku(@puzzle3), @solution3)
+    expect(sudoku($puzzle)).to eq($solution)
+  end
+
+  it "should return completed puzzle" do
+    expect(sudoku($puzzle2)).to eq($solution2)
+  end
+
+  it "should return completed puzzle" do
+    expect(sudoku($puzzle3)).to eq($solution3)
   end
 
 end
