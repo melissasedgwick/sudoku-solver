@@ -56,7 +56,7 @@ class Sudoku
           end
         end
       end
-    return @rows
+    @solved_puzzle = @rows
   end
 
   def create_blocks(rows)
@@ -137,8 +137,8 @@ class Sudoku
 
   def solve_user_puzzle
     user_input
-    array = sudoku(@puzzle)
-    print array_to_board(array)
+    solve_sudoku(@puzzle)
+    print array_to_board(@solved_puzzle)
   end
 
 end
