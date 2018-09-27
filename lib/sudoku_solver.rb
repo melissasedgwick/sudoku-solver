@@ -114,9 +114,30 @@ def user_input
   return @puzzle
 end
 
+def array_to_board(array)
+  board = ""
+  x = 0
+  array.each do |row|
+    y = 0
+    while y < 9 do
+      board << row[y].to_s
+      y += 1
+      board << " | " if (y) % 3 == 0 && y != 0 && y != 9
+    end
+    board += "\n"
+    x += 1
+    if x % 3 == 0 && x != 9
+      board << "-----------------"
+      board += "\n"
+    end
+  end
+  print board
+end
+
 def solve_user_puzzle
   user_input
-  print sudoku(@puzzle)
+  array = sudoku(@puzzle)
+  print array_to_board(array)
 end
 
 solve_user_puzzle
