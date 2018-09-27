@@ -22,25 +22,22 @@ class Sudoku
           poss_in_column = NUMBERS - @columns[y]
           poss_in_block = NUMBERS - @blocks[@block]
           poss_nums = []
-            # create array of possible numbers for each blank box
-            poss_in_row.each do |num|
-              poss_nums << num if poss_in_column.include?(num) && poss_in_block.include?(num)
-            end
-            if poss_nums.nil?
-            elsif poss_nums.length == 1     # if there is only one possible number
-              @rows[x][y] = poss_nums[0]     # replace the blank with that number in the puzzle
-              updated << [x, y]             # add the coordinates of this to the 'updated' array
-            else
-              unknowns[[x, y]] = poss_nums  # if not, add the coordinates of the blank box to the 'unknowns' array
-            end
+          poss_in_row.each do |num|
+            poss_nums << num if poss_in_column.include?(num) && poss_in_block.include?(num)
           end
-          y += 1
+          if poss_nums.nil?
+          elsif poss_nums.length == 1
+            @rows[x][y] = poss_nums[0]
+            updated << [x, y]
+          else
+            unknowns[[x, y]] = poss_nums
+          end
         end
-        x += 1
+        y += 1
       end
+      x += 1
+    end
 
-      # iterate through the board again, only checking the blanks and only if they are in
-      # the same column, row, or block as a number which has been updated
       updated.each do |coords|
         coords_block = which_block?(coords[0], coords[1])
         unknowns.each do |unk_coords, poss_nums|
@@ -116,32 +113,33 @@ class Sudoku
   end
 
   def array_to_board(array)
-    board = ""
+    @board = ""
     x = 0
     array.each do |row|
       y = 0
       while y < 9 do
-        board << row[y].to_s
+        @board << row[y].to_s
         y += 1
-        board << " | " if (y) % 3 == 0 && y != 0 && y != 9
+        @board << " | " if (y) % 3 == 0 && y != 0 && y != 9
       end
-      board += "\n"
+      @board += "\n"
       x += 1
       if x % 3 == 0 && x != 9
-        board << "-----------------"
-        board += "\n"
+        @board << "-----------------"
+        @board += "\n"
       end
     end
-    print board
+    return @board
   end
 
   def solve_user_puzzle
     user_input
     solve_sudoku(@puzzle)
-    print array_to_board(@solved_puzzle)
+    array_to_board(@solved_puzzle)
+    print @board
   end
 
 end
 
-#puzzle = Sudoku.new
-#puzzle.solve_user_puzzle
+puzzle = Sudoku.new
+puzzle.solve_user_puzzle
