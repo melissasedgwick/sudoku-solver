@@ -8,7 +8,7 @@ The Sudoku Solver is a program which solves simple sudokus (where no guess-work 
 
 ## Usage
 
-To run with user input, add the following code o the end of sudoku_solver.rb:
+To run with user input, add the following code to the end of sudoku_solver.rb:
 
 `puzzle = Sudoku.new`
 
