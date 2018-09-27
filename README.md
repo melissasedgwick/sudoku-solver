@@ -4,15 +4,13 @@ The Sudoku Solver is a program which solves simple sudokus (where no guess-work 
 
 ## Getting started
 
-`git clone path-to-your-repo`
-`command_to_install_dependencies` (e.g. `bundle`)
+`git clone https://github.com/melissasedgwick/sudoku-solver.git`
 
 ## Usage
 
-`command_to_start` (e.g. `rackup` or `rails s`)
-Navigate to `http://localhost:4567/`
+`ruby sudoku-solver.rb`
 
 
 ## Running tests
 
-`test_command` (e.g. `rspec`)
+`rspec`
