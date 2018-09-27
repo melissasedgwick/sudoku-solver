@@ -114,4 +114,9 @@ def user_input
   return @puzzle
 end
 
-user_input
+def solve_user_puzzle
+  user_input
+  print sudoku(@puzzle)
+end
+
+solve_user_puzzle
