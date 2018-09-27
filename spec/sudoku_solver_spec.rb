@@ -1,6 +1,6 @@
 require 'sudoku_solver'
 
-describe "Solution" do
+describe Sudoku do
 
 $puzzle = [
   [5,3,0,0,7,0,0,0,0],
@@ -69,16 +69,20 @@ $solution3 = [
   [6, 7, 2, 1, 9, 5, 3, 4, 8],
   [1, 9, 8, 3, 4, 2, 5, 6, 7]]
 
-  it "should return completed puzzle" do
-    expect(sudoku($puzzle)).to eq($solution)
+  before :each do
+    @puzzle = Sudoku.new
   end
 
   it "should return completed puzzle" do
-    expect(sudoku($puzzle2)).to eq($solution2)
+    expect(@puzzle.sudoku($puzzle)).to eq($solution)
   end
 
   it "should return completed puzzle" do
-    expect(sudoku($puzzle3)).to eq($solution3)
+    expect(@puzzle.sudoku($puzzle2)).to eq($solution2)
+  end
+
+  it "should return completed puzzle" do
+    expect(@puzzle.sudoku($puzzle3)).to eq($solution3)
   end
 
 end
