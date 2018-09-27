@@ -1,45 +1,13 @@
 class Sudoku
 
-  NUMBERS = (1..9).to_a # define which numbers are possible in each box
+  NUMBERS = (1..9).to_a
+  ORDINALIZE = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh",
+        "eighth", "ninth",]
 
   def sudoku(rows)
     columns = rows.transpose  # define columns
 
-    # define blocks
-    blocks = Array.new(9){Array.new}
-    i = 0
-    j = 0
-    numbers = rows.flatten.each_slice(3).to_a
-    while numbers.length > 0 do
-      blocks[j] << numbers.delete_at(0)
-      i += 1
-        if i % 3 == 0 && blocks[j].length < 3
-          j -= 2
-        else
-          j += 1
-        end
-    end
-  blocks.map! { |x| x.flatten }
-
-    # create method for checking which block a digit is in, based on coordinates)
-    def which_block?(x, y)
-      which_block = {0 => [[0, 1, 2], [0, 1, 2]],
-        1 => [[0, 1, 2], [3, 4, 5]],
-        2 => [[0, 1, 2], [6, 7, 8]],
-        3 => [[3, 4, 5], [0, 1, 2]],
-        4 => [[3, 4, 5], [3, 4, 5]],
-        5 => [[3, 4, 5], [6, 7, 8]],
-        6 => [[6, 7, 8], [0, 1, 2]],
-        7 => [[6, 7, 8], [3, 4, 5]],
-        8 => [[6, 7, 8], [6, 7, 8]]
-      }
-      which_block.each do |block, location|
-        if location[0].include?(x) && location[1].include?(y)
-          @block = block
-          return @block
-        end
-      end
-    end
+    blocks = create_blocks(rows)
 
     unknowns = {}
     updated = []
@@ -89,13 +57,45 @@ class Sudoku
           end
         end
       end
-
     return rows
-
   end
 
-  ORDINALIZE = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh",
-        "eighth", "ninth",]
+  def create_blocks(rows)
+    blocks = Array.new(9){Array.new}
+    i = 0
+    j = 0
+    numbers = rows.flatten.each_slice(3).to_a
+    while numbers.length > 0 do
+      blocks[j] << numbers.delete_at(0)
+      i += 1
+        if i % 3 == 0 && blocks[j].length < 3
+          j -= 2
+        else
+          j += 1
+        end
+    end
+    blocks.map! { |x| x.flatten }
+    return blocks
+  end
+
+  def which_block?(x, y)
+    which_block = {0 => [[0, 1, 2], [0, 1, 2]],
+      1 => [[0, 1, 2], [3, 4, 5]],
+      2 => [[0, 1, 2], [6, 7, 8]],
+      3 => [[3, 4, 5], [0, 1, 2]],
+      4 => [[3, 4, 5], [3, 4, 5]],
+      5 => [[3, 4, 5], [6, 7, 8]],
+      6 => [[6, 7, 8], [0, 1, 2]],
+      7 => [[6, 7, 8], [3, 4, 5]],
+      8 => [[6, 7, 8], [6, 7, 8]]
+    }
+    which_block.each do |block, location|
+      if location[0].include?(x) && location[1].include?(y)
+        @block = block
+        return @block
+      end
+    end
+  end
 
   def user_input
     puts "Please enter numbers in the format 123095040, with 0s to mark where blanks appear."
