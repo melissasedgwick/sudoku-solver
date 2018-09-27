@@ -8,6 +8,14 @@ The Sudoku Solver is a program which solves simple sudokus (where no guess-work 
 
 ## Usage
 
+To use with user input, add:
+
+`puzzle = Sudoku.new
+puzzle.solve_user_puzzle`
+
+To the end of sudoku_solver.rb
+From command line (Terminal), run:
+
 `ruby sudoku-solver.rb`
 
 
