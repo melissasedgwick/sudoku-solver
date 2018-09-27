@@ -74,15 +74,15 @@ $solution3 = [
   end
 
   it "should return completed puzzle" do
-    expect(@puzzle.sudoku($puzzle)).to eq($solution)
+    expect(@puzzle.solve_sudoku($puzzle)).to eq($solution)
   end
 
   it "should return completed puzzle" do
-    expect(@puzzle.sudoku($puzzle2)).to eq($solution2)
+    expect(@puzzle.solve_sudoku($puzzle2)).to eq($solution2)
   end
 
   it "should return completed puzzle" do
-    expect(@puzzle.sudoku($puzzle3)).to eq($solution3)
+    expect(@puzzle.solve_sudoku($puzzle3)).to eq($solution3)
   end
 
 end

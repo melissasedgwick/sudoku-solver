@@ -4,24 +4,23 @@ class Sudoku
   ORDINALIZE = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh",
         "eighth", "ninth",]
 
-  def sudoku(rows)
-    columns = rows.transpose  # define columns
-
-    blocks = create_blocks(rows)
+  def solve_sudoku(puzzle)
+    @rows = puzzle
+    @columns = @rows.transpose
+    @blocks = create_blocks(@rows)
 
     unknowns = {}
     updated = []
 
-    # iterate over entire board first time
-    x = 0 # refers to which row a digit is in
+    x = 0
     while x < 9 do
-      y = 0   # refers to which column a digit is in
+      y = 0
       while y < 9 do
-        which_block?(x, y)  # call which_block? method on coordinates
-        if rows[x][y] == 0    # if the cell is blank
-          poss_in_row = NUMBERS - rows[x]
-          poss_in_column = NUMBERS - columns[y]
-          poss_in_block = NUMBERS - blocks[@block]
+        which_block?(x, y)
+        if @rows[x][y] == 0
+          poss_in_row = NUMBERS - @rows[x]
+          poss_in_column = NUMBERS - @columns[y]
+          poss_in_block = NUMBERS - @blocks[@block]
           poss_nums = []
             # create array of possible numbers for each blank box
             poss_in_row.each do |num|
@@ -29,7 +28,7 @@ class Sudoku
             end
             if poss_nums.nil?
             elsif poss_nums.length == 1     # if there is only one possible number
-              rows[x][y] = poss_nums[0]     # replace the blank with that number in the puzzle
+              @rows[x][y] = poss_nums[0]     # replace the blank with that number in the puzzle
               updated << [x, y]             # add the coordinates of this to the 'updated' array
             else
               unknowns[[x, y]] = poss_nums  # if not, add the coordinates of the blank box to the 'unknowns' array
@@ -47,17 +46,17 @@ class Sudoku
         unknowns.each do |unk_coords, poss_nums|
           unk_block = which_block?(unk_coords[0], unk_coords[1])
           if unk_coords[0] == coords[0] || unk_coords[1] == coords[1] || coords_block == unk_block
-            poss_nums.delete(rows[coords[0]][coords[1]])
+            poss_nums.delete(@rows[coords[0]][coords[1]])
           end
           if poss_nums.nil?
           elsif poss_nums.length == 1
-            rows[unk_coords[0]][unk_coords[1]] = poss_nums[0]
+            @rows[unk_coords[0]][unk_coords[1]] = poss_nums[0]
             unknowns.delete(unk_coords)
             updated << unk_coords
           end
         end
       end
-    return rows
+    return @rows
   end
 
   def create_blocks(rows)
