@@ -9,7 +9,6 @@ def sudoku(rows)
   j = 0
   numbers = rows.flatten.each_slice(3).to_a
   while numbers.length > 0 do
-  end
     blocks[j] << numbers.delete_at(0)
     i += 1
       if i % 3 == 0 && blocks[j].length < 3
