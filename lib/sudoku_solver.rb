@@ -91,3 +91,27 @@ blocks.map! { |x| x.flatten }
   return rows
 
 end
+
+ORDINALIZE = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh",
+      "eighth", "ninth",]
+
+def user_input
+  puts "Please enter numbers in the format 123095040, with 0s to mark where blanks appear."
+  i = 0
+  @puzzle = []
+  while i < 9 do
+    puts "Please enter the #{ORDINALIZE[i]} row of numbers."
+    list = gets.chomp
+    while list.scan(/\D/).empty? == false || list.length != 9 do
+      puts "Please enter the row of numbers in the correct format."
+      list = gets.chomp
+    end
+    row = []
+    list.split("").each { |x| row << x.to_i }
+    @puzzle << row
+    i += 1
+  end
+  return @puzzle
+end
+
+user_input
